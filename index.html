@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Валерия — Веб-разработчик / Digital-специалист</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0f1116;
+            --card: #171a21;
+            --card-2: #1e222b;
+            --text: #eef1f6;
+            --muted: #9aa3b2;
+            --accent: #ffcc00;
+            --accent-2: #2b6cff;
+            --radius: 16px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, "Segoe UI", Roboto, Inter, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+
+        /* ===== ХЕДЕР ===== */
+        header { padding: 80px 0 60px; border-bottom: 1px solid #232833; }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--accent);
+            background: rgba(255, 204, 0, .08);
+            border: 1px solid rgba(255, 204, 0, .25);
+            padding: 5px 14px;
+            border-radius: 20px;
+            margin-bottom: 24px;
+        }
+
+        .status::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(255, 204, 0, .15);
+        }
+
+        h1 {
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        h1 span { color: var(--accent); }
+
+        .subtitle {
+            font-size: clamp(16px, 2vw, 20px);
+            color: var(--muted);
+            margin-top: 16px;
+            max-width: 640px;
+        }
+
+        .contacts { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+
+        .contacts a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text);
+            text-decoration: none;
+            background: var(--card);
+            border: 1px solid #262b36;
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-size: 14px;
+            transition: .2s;
+        }
+
+        .contacts a:hover { border-color: var(--accent); background: var(--card-2); }
+
+        /* ===== СЕКЦИИ ===== */
+        section { padding: 64px 0; border-bottom: 1px solid #232833; }
+
+        .sec-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 28px;
+            font-weight: 700;
+        }
+
+        /* О себе */
+        .about p { font-size: 17px; color: #cdd4e0; max-width: 760px; }
+        .about p + p { margin-top: 16px; }
+
+        /* Навыки */
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .skill {
+            background: var(--card);
+            border: 1px solid #262b36;
+            border-radius: var(--radius);
+            padding: 22px;
+            transition: .25s;
+        }
+
+        .skill:hover { transform: translateY(-4px); border-color: #3a4150; }
+
+        .skill h3 { font-size: 16px; margin-bottom: 10px; }
+        .skill p { font-size: 14px; color: var(--muted); }
+
+        .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+
+        .tag {
+            font-size: 13px;
+            color: #cdd4e0;
+            background: var(--card-2);
+            border: 1px solid #2c323e;
+            padding: 6px 14px;
+            border-radius: 20px;
+        }
+
+        /* Проекты */
+        .item {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            gap: 24px;
+            padding: 26px 0;
+            border-top: 1px solid #232833;
+        }
+
+        .item:first-of-type { border-top: none; padding-top: 0; }
+
+        .item .period { font-size: 14px; color: var(--muted); padding-top: 3px; }
+        .item h3 { font-size: 18px; margin-bottom: 6px; }
+        .item .role { font-size: 14px; color: var(--accent); margin-bottom: 12px; }
+        .item ul { list-style: none; }
+
+        .item li {
+            font-size: 15px;
+            color: #cdd4e0;
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 6px;
+        }
+
+        .item li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* Образование */
+        .edu {
+            background: var(--card);
+            border: 1px solid #262b36;
+            border-radius: var(--radius);
+            padding: 28px;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .edu h3 { font-size: 19px; margin-bottom: 6px; }
+        .edu p { font-size: 15px; color: var(--muted); }
+        .edu .year { color: var(--accent); font-weight: 600; font-size: 15px; }
+
+        /* CTA */
+        .cta-block { text-align: center; padding: 72px 0; }
+        .cta-block h2 {
+            font-size: clamp(24px, 3.5vw, 34px);
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+        .cta-block p { color: var(--muted); margin-bottom: 32px; }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: #0f1116;
+            font-weight: 700;
+            text-decoration: none;
+            padding: 16px 40px;
+            border-radius: 14px;
+            font-size: 16px;
+            transition: .2s;
+        }
+
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255, 204, 0, .3); }
+
+        footer {
+            text-align: center;
+            padding: 32px 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* Анимация */
+        .reveal { opacity: 0; transform: translateY(24px); transition: .6s ease; }
+        .reveal.on { opacity: 1; transform: none; }
+
+        @media (max-width: 640px) {
+            .item { grid-template-columns: 1fr; gap: 8px; }
+            header { padding: 56px 0 40px; }
+            section { padding: 48px 0; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== ХЕДЕР ===== -->
+    <header>
+        <div class="wrap">
+            <div class="status">Открыта к стажировке · Веб / Digital</div>
+            <h1>Валерия, <span>20 лет</span></h1>
+            <p class="subtitle">
+                Начинающий веб-разработчик и digital-специалист. Работаю с вёрсткой,
+                интерфейсами и данными — от идеи и макета до готового решения в коде.
+            </p>
+            <div class="contacts">
+                <a href="mailto:valeron112006@gmail.com">✉️ valeron112006@gmail.com</a>
+                <a href="tel:89372819507">📞 8 937 281-95-07</a>
+                <a href="https://t.me/tssjkll" target="_blank" rel="noopener">💬 Telegram: @tssjkll</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== О СЕБЕ ===== -->
+    <section class="about reveal">
+        <div class="wrap">
+            <div class="sec-title">О себе</div>
+            <p>
+                Закончила КТИТС по специальности «Информационные технологии»,
+                специализация — веб-разработчик сайтов и мультимедийных приложений.
+                Умею смотреть на продукт с двух сторон: как человек, который продумывает
+                логику и структуру интерфейса, и как разработчик, который понимает,
+                как это собирается и ведёт себя при разном контенте.
+            </p>
+            <p>
+                В рамках дипломного проекта разработала интернет-магазин «Сладкоежка»
+                полного цикла — от дизайна в Figma до серверной логики на Laravel
+                и базы данных MySQL. Мне интересна разработка веб-продуктов
+                и интерфейсов: адаптация под разные экраны, работа с данными
+                и превращение удачных решений в переиспользуемые компоненты.
+                Быстро учусь, спокойно разбираюсь в чужом коде и внимательна к деталям.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== НАВЫКИ ===== -->
+    <section class="reveal">
+        <div class="wrap">
+            <div class="sec-title">Навыки</div>
+            <div class="skills">
+                <div class="skill">
+                    <h3>Figma</h3>
+                    <p>Компоненты, автолейауты, варианты, прототипы. Сборка адаптивных макетов под разные экраны.</p>
+                </div>
+                <div class="skill">
+                    <h3>HTML / CSS</h3>
+                    <p>Адаптивная и кроссбраузерная вёрстка, Flexbox, Grid, семантичная разметка, медиазапросы.</p>
+                </div>
+                <div class="skill">
+                    <h3>JavaScript</h3>
+                    <p>Интерактив: слайдеры, аккордеоны, модальные окна, валидация форм, работа с DOM.</p>
+                </div>
+                <div class="skill">
+                    <h3>PHP / Laravel</h3>
+                    <p>MVC-архитектура, маршрутизация, Eloquent ORM, Blade-шаблоны, middleware, валидация, аутентификация с ролями.</p>
+                </div>
+                <div class="skill">
+                    <h3>MySQL</h3>
+                    <p>Проектирование БД, связи между таблицами, запросы, миграции, работа через Eloquent ORM.</p>
+                </div>
+            </div>
+            <div class="tags">
+                <span class="tag">Адаптивная вёрстка</span>
+                <span class="tag">Прототипирование</span>
+                <span class="tag">Работа с макетами</span>
+                <span class="tag">Laravel</span>
+                <span class="tag">PHP</span>
+                <span class="tag">MySQL</span>
+                <span class="tag">Компонентный подход</span>
+                <span class="tag">Внимание к деталям</span>
+                <span class="tag">Быстрое обучение</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ПРОЕКТЫ ===== -->
+    <section class="reveal">
+        <div class="wrap">
+            <div class="sec-title">Проекты</div>
+
+            <div class="item">
+                <div class="period">2026 · Дипломный проект</div>
+                <div>
+                    <h3>Интернет-магазин «Сладкоежка»</h3>
+                    <div class="role">Проектирование и разработка · Figma, HTML, CSS, JavaScript, PHP (Laravel), MySQL</div>
+                    <ul>
+                        <li>Спроектировала и разработала интернет-магазин кондитерских изделий полного цикла — от регистрации и каталога до оформления заказа и админ-панели.</li>
+                        <li>Собрала адаптивный интерфейс в Figma и сверстала его под три разрешения (1400px, 768px, 390px): главная, каталог, карточка товара, корзина, оформление заказа, личный кабинет, админ-панель.</li>
+                        <li>Реализовала уникальный модуль — <strong>конструктор торта</strong> с динамическим пересчётом стоимости (размер, корж, крем, начинки, дизайн, упаковка, надпись).</li>
+                        <li>Спроектировала базу данных MySQL: 12+ таблиц (пользователи, товары, категории, корзина, заказы, отзывы, опции конструктора) со связями «один ко многим».</li>
+                        <li>Разработала серверную часть на Laravel: аутентификация с ролями (гость / пользователь / администратор), корзина, оформление заказа с оплатой через ЮKassa, бонусная программа, модерация отзывов, статистика в админ-панели.</li>
+                        <li>Провела тестирование методом «белого ящика» (W3C CSS Validation, DevTools) и по тест-кейсам — 20 сценариев: регистрация, авторизация, корзина, заказ, конструктор, админ-функции. Все пройдены.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== ОБРАЗОВАНИЕ ===== -->
+    <section class="reveal">
+        <div class="wrap">
+            <div class="sec-title">Образование</div>
+            <div class="edu">
+                <div>
+                    <h3>КТИТС</h3>
+                    <p>Информационные технологии<br>Специализация: веб-разработчик сайтов и мультимедийных приложений</p>
+                </div>
+                <div class="year">2026</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <div class="cta-block">
+        <div class="wrap">
+            <h2>Готова обсудить задачи</h2>
+            <p>Открыта к стажировке и первой работе в веб-разработке</p>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 Валерия 
+    </footer>
+
+    <script>
+        const items = document.querySelectorAll('.reveal');
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('on');
+                    io.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        items.forEach(el => io.observe(el));
+    </script>
+
+</body>
+
+</html>
